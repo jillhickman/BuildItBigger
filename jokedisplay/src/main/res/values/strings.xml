@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">JokeDisplay</string>
+
+    <string name="display_joke">Displaying a funny joke here.</string>
 </resources>
