@@ -1,16 +1,12 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Pair;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import com.example.JokeGenerator;
-import com.jillhickman.jokedisplay.JokeActivity;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -20,7 +16,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
+//        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
     }
 
 
@@ -51,11 +47,14 @@ public class MainActivity extends ActionBarActivity {
 //        Toast.makeText(this, myJokeGenerator.getJoke(), Toast.LENGTH_SHORT).show();
 
 
-        Intent intent = new Intent(this, JokeActivity.class);
-        JokeGenerator jokeSource = new JokeGenerator();
-        String joke = jokeSource.getJoke();
-        intent.putExtra(JokeActivity.JOKE_KEY, joke);
-        startActivity(intent);
+//        Intent intent = new Intent(this, JokeActivity.class);
+//        JokeGenerator jokeSource = new JokeGenerator();
+//        String joke = jokeSource.getJoke();
+//        intent.putExtra(JokeActivity.JOKE_KEY, joke);
+//        startActivity(intent);
+
+        //Calling the EndpointAsyncTask here when button is pushed.
+        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
 
     }
 

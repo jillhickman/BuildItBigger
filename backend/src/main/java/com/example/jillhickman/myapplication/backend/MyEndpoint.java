@@ -6,6 +6,7 @@
 
 package com.example.jillhickman.myapplication.backend;
 
+import com.example.JokeGenerator;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
@@ -29,6 +30,19 @@ public class MyEndpoint {
     public MyBean sayHi(@Named("name") String name) {
         MyBean response = new MyBean();
         response.setData("Hi, " + name);
+
+        return response;
+    }
+
+    /** A simple endpoint method that gets joke from the JokeGenerator*/
+    @ApiMethod(name = "sayJoke")
+    public MyBean sayJoke() {
+        MyBean response = new MyBean();
+
+        // generate a joke here and send this as the response
+        JokeGenerator jokeSource = new JokeGenerator();
+        String joke = jokeSource.getJoke();
+        response.setData(joke);
 
         return response;
     }
