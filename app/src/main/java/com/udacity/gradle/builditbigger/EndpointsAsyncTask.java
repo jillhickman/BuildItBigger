@@ -3,7 +3,6 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Pair;
-import android.widget.Toast;
 
 import com.example.jillhickman.myapplication.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -17,6 +16,18 @@ import java.io.IOException;
 class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+
+    // you may separate this or combined to caller class.
+    public interface AsyncResponse {
+        void processFinish(String output);
+    }
+
+    public AsyncResponse delegate = null;
+
+    public EndpointsAsyncTask(AsyncResponse delegate){
+        this.delegate = delegate;
+    }
+
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -35,7 +46,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
         String name = params[0].second;
 
         try {
-//            return myApiService.sayHi(name).execute().getData();
+            //Calling my sayJoke from the backend
             return myApiService.sayJoke().execute().getData();
 
         } catch (IOException e) {
@@ -45,6 +56,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        delegate.processFinish(result);
+//        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
     }
 }

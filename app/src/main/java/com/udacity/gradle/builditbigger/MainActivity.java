@@ -1,15 +1,19 @@
 package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import com.jillhickman.jokedisplay.JokeActivity;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements EndpointsAsyncTask.AsyncResponse{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +58,37 @@ public class MainActivity extends ActionBarActivity {
 //        startActivity(intent);
 
         //Calling the EndpointAsyncTask here when button is pushed.
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
+        //Getting the results to fire an intent
+//        EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask(new EndpointsAsyncTask.AsyncResponse() {
+//            @Override
+//            public void processFinish(String output) {
+//
+//            }
+//        }).execute(new Pair<Context, String>(this, "Manfred"));
+
+//        EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask(new EndpointsAsyncTask.AsyncResponse() {
+//            @Override
+//            public void processFinish(String output) {
+//                Intent intent = new Intent(getApplicationContext(), JokeActivity.class);
+////                JokeGenerator jokeSource = new JokeGenerator();
+////                String joke = jokeSource.getJoke();
+//                intent.putExtra(JokeActivity.JOKE_KEY, output);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        endpointsAsyncTask.execute(new Pair<Context, String>(this, "Jill"));
+
+        new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, "Jill"));
 
     }
 
 
+    @Override
+    public void processFinish(String output) {
+        Toast.makeText(this, output, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getApplicationContext(), JokeActivity.class);
+        intent.putExtra(JokeActivity.JOKE_KEY, output);
+        startActivity(intent);
+    }
 }
