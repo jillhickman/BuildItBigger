@@ -17,7 +17,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     private static MyApi myApiService = null;
     private Context context;
 
-    // you may separate this or combined to caller class.
+    // Using AsyncResponse interface to get results back to MainActivity class
     public interface AsyncResponse {
         void processFinish(String output);
     }
@@ -54,6 +54,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
         }
     }
 
+    //
     @Override
     protected void onPostExecute(String result) {
         delegate.processFinish(result);
