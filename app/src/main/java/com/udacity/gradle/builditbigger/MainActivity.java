@@ -1,10 +1,8 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,8 +16,6 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
     }
 
 
@@ -48,8 +44,7 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
     public void tellJoke(View view){
 
         //Calling the EndpointAsyncTask here when button is pushed.
-        new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, "Jill"));
-
+        new EndpointsAsyncTask(this).execute();
     }
 
     //This override the implemented method from asyncTask
