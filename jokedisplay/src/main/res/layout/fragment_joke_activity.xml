@@ -8,6 +8,8 @@
         android:id="@+id/joke_textview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/display_joke" />
+        android:text="@string/display_joke"
+        android:textSize="@dimen/abc_text_size_title_material"
+        />
 
 </FrameLayout>
